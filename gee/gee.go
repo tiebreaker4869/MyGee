@@ -1,6 +1,7 @@
 package gee
 
 import (
+	"fmt"
 	"net/http"
 )
 
@@ -29,8 +30,11 @@ func (engine *Engine) POST(pattern string, handler HandlerFunc) {
 
 func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
 	key := req.Method + "-" + req.URL.Path
-	handler := engine.route[key]
-	handler(w, req)
+	if handler, ok := engine.route[key]; ok {
+		handler(w, req)
+	} else {
+		fmt.Fprintln(w, "404 NOT FOUND")
+	}
 }
 
 func (engine *Engine) Run(addr string) (err error) {
