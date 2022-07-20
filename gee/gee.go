@@ -28,7 +28,9 @@ func (engine *Engine) POST(pattern string, handler HandlerFunc) {
 }
 
 func (engine *Engine) ServeHTTP(w http.ResponseWriter, req *http.Request) {
-
+	key := req.Method + "-" + req.URL.Path
+	handler := engine.route[key]
+	handler(w, req)
 }
 
 func (engine *Engine) Run(addr string) (err error) {
