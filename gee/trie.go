@@ -10,10 +10,10 @@ type node struct {
 	isWild bool
 }
 
-func (*node) insert() {
+func (*node) insert(pattern string, parts []string, height int) {
 
 }
 
-func (*node) search() *node {
+func (*node) search(parts []string, height int) *node {
 	return nil
 }
