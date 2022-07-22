@@ -33,7 +33,6 @@ func (n *node) getAllMatchChildren(part string) []*node {
 	return children
 }
 
-//parts[height] 是要插入的下一个
 func (n *node) insert(pattern string, parts []string, height int) {
 	if len(parts) == height {
 		n.pattern = pattern
