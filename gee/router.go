@@ -27,8 +27,8 @@ func parsePattern(pattern string) []string {
 
 func newRouter() *router {
 	return &router{
-		roots:    make(map[string]*node),
-		handlers: make(map[string]HandlerFunc),
+		roots:    make(map[string]*node, 0),
+		handlers: make(map[string]HandlerFunc, 0),
 	}
 }
 
@@ -81,7 +81,7 @@ func (r *router) handle(c *Context) {
 	n, params := r.getRoute(c.Method, c.Path)
 	if n != nil {
 		c.Params = params
-		key := c.Method + "-" + c.Path
+		key := c.Method + "-" + n.pattern
 		r.handlers[key](c)
 	} else {
 		c.String(http.StatusNotFound, "404 NOT FOUND, : %s", c.Path)

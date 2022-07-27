@@ -12,12 +12,12 @@ func main() {
 	})
 
 	r.GET("/hello", func(c *gee.Context) {
-		// expect /hello?name=geektutu
+		// expect /hello?name=steven
 		c.String(http.StatusOK, "hello %s, you're at %s\n", c.Query("name"), c.Path)
 	})
 
 	r.GET("/hello/:name", func(c *gee.Context) {
-		// expect /hello/geektutu
+		// expect /hello/steven
 		c.String(http.StatusOK, "hello %s, you're at %s\n", c.Param("name"), c.Path)
 	})
 
