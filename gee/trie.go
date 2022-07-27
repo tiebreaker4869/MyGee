@@ -58,7 +58,7 @@ func (n *node) insert(pattern string, parts []string, height int) {
 func (n *node) search(parts []string, height int) *node {
 	//匹配到最后一个 part 或者匹配到第一个 * 就结束匹配
 	if height == len(parts) || strings.HasPrefix(n.part, "*") {
-		if n.part == "" {
+		if n.pattern == "" {
 			return nil
 		}
 
