@@ -20,6 +20,10 @@ type Context struct {
 
 	//response info
 	StatusCode int
+
+	//middlewares
+	handlers []HandlerFunc
+	index    int
 }
 
 func newContext(w http.ResponseWriter, req *http.Request) *Context {
@@ -28,6 +32,17 @@ func newContext(w http.ResponseWriter, req *http.Request) *Context {
 		Writer: w,
 		Method: req.Method,
 		Path:   req.URL.Path,
+		index:  -1,
+	}
+}
+
+//pass control to next middleware
+func (c *Context) Next() {
+	c.index++
+	length := len(c.handlers)
+
+	for ; c.index < length; c.index++ {
+		c.handlers[c.index](c)
 	}
 }
 
