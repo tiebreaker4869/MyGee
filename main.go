@@ -27,7 +27,7 @@ func main() {
 	r.LoadHTMLGlob("templates/*")
 	r.Static("/assets", "./static")
 
-	stu1 := &student{Name: "Geektutu", Age: 20}
+	stu1 := &student{Name: "Steven", Age: 20}
 	stu2 := &student{Name: "Jack", Age: 22}
 	r.GET("/", func(c *gee.Context) {
 		c.HTML(http.StatusOK, "css.tmpl", nil)
